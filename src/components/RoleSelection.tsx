@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { useWallet } from '@/contexts/WalletContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { house, users } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { House, Users } from 'lucide-react';
 
 const RoleSelection = () => {
   const { setUserRole } = useWallet();
@@ -13,60 +13,60 @@ const RoleSelection = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Welcome to MonadRent</h1>
-          <p className="text-xl text-purple-200">Choose your role to get started</p>
+          <h2 className="text-3xl font-bold text-white mb-4">Choose Your Role</h2>
+          <p className="text-purple-200">Select how you want to use MonadRent</p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer group">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <house className="w-8 h-8 text-white" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer" onClick={() => handleRoleSelect('landlord')}>
+            <CardHeader className="text-center">
+              <div className="mx-auto mb-4 p-3 bg-red-500/20 rounded-full w-16 h-16 flex items-center justify-center">
+                <House className="w-8 h-8 text-red-400" />
               </div>
-              <CardTitle className="text-2xl text-white">Landlord</CardTitle>
+              <CardTitle className="text-white">Landlord</CardTitle>
               <CardDescription className="text-purple-200">
-                List your properties and earn from rentals
+                List and manage your properties on the blockchain
               </CardDescription>
             </CardHeader>
-            <CardContent className="text-center">
-              <ul className="text-purple-100 mb-6 space-y-2">
-                <li>• Create property NFTs with Pinata IPFS</li>
-                <li>• Set rental prices and terms</li>
-                <li>• Manage bookings and payments</li>
-                <li>• Track rental income</li>
+            <CardContent>
+              <ul className="text-sm text-purple-200 space-y-2 mb-6">
+                <li>• Create NFT-verified property listings</li>
+                <li>• Manage rental agreements with smart contracts</li>
+                <li>• Receive secure payments in MONAD tokens</li>
+                <li>• Track property performance and analytics</li>
               </ul>
               <Button 
                 onClick={() => handleRoleSelect('landlord')}
-                className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700"
+                className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700"
               >
                 Continue as Landlord
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer group">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <users className="w-8 h-8 text-white" />
+          <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer" onClick={() => handleRoleSelect('tenant')}>
+            <CardHeader className="text-center">
+              <div className="mx-auto mb-4 p-3 bg-blue-500/20 rounded-full w-16 h-16 flex items-center justify-center">
+                <Users className="w-8 h-8 text-blue-400" />
               </div>
-              <CardTitle className="text-2xl text-white">Tenant</CardTitle>
+              <CardTitle className="text-white">Tenant</CardTitle>
               <CardDescription className="text-purple-200">
-                Find and book amazing properties
+                Find and rent verified properties with confidence
               </CardDescription>
             </CardHeader>
-            <CardContent className="text-center">
-              <ul className="text-purple-100 mb-6 space-y-2">
-                <li>• Browse verified properties</li>
-                <li>• Secure blockchain payments</li>
-                <li>• Rate and review properties</li>
-                <li>• Manage your bookings</li>
+            <CardContent>
+              <ul className="text-sm text-purple-200 space-y-2 mb-6">
+                <li>• Browse NFT-verified property listings</li>
+                <li>• Secure rentals with smart contract protection</li>
+                <li>• Make payments with MONAD tokens</li>
+                <li>• Access transparent rental agreements</li>
               </ul>
               <Button 
                 onClick={() => handleRoleSelect('tenant')}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
               >
                 Continue as Tenant
               </Button>

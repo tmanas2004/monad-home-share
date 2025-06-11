@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
-import { useWallet } from '@/contexts/WalletContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { upload } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { Upload } from 'lucide-react';
 
 const KYCForm = () => {
   const { userRole, setHasCompletedKYC } = useWallet();
@@ -90,7 +89,7 @@ const KYCForm = () => {
       <Card className="bg-white/10 backdrop-blur-lg border-white/20">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <upload className="w-6 h-6" />
+            <Upload className="w-6 h-6" />
             Complete Your KYC Verification
           </CardTitle>
           <CardDescription className="text-purple-200">

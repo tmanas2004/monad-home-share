@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useWallet } from '@/contexts/WalletContext';
 import PropertyCard from './PropertyCard';
@@ -23,7 +22,7 @@ interface Property {
 }
 
 const PropertyBrowser = () => {
-  const { userRole, hasCompletedKYC } = useWallet();
+  const { userRole, hasCompletedKYC, connected } = useWallet();
   const { toast } = useToast();
   const [properties, setProperties] = useState<Property[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -85,6 +84,15 @@ const PropertyBrowser = () => {
   };
 
   const handleBookProperty = (property: Property) => {
+    if (!connected) {
+      toast({
+        title: "Wallet Connection Required",
+        description: "Please connect your Phantom wallet to book properties.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!hasCompletedKYC) {
       toast({
         title: "KYC Required",
@@ -99,10 +107,6 @@ const PropertyBrowser = () => {
       description: `Booking process started for ${property.title}. Smart contract deployment in progress...`,
     });
     
-    // In a real implementation, this would:
-    // 1. Create a smart contract for the rental agreement
-    // 2. Handle payment escrow
-    // 3. Update property availability
     console.log('Booking property:', property);
   };
 
@@ -175,7 +179,15 @@ const PropertyBrowser = () => {
               </p>
             </div>
             
-            {userRole === 'tenant' && selectedProperty.available && (
+            {!connected && selectedProperty.available && (
+              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
+                <p className="text-yellow-300 text-center">
+                  Connect your Phantom wallet to book this property
+                </p>
+              </div>
+            )}
+            
+            {connected && userRole === 'tenant' && selectedProperty.available && (
               <Button 
                 onClick={() => handleBookProperty(selectedProperty)}
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
@@ -200,7 +212,12 @@ const PropertyBrowser = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="max-w-md bg-white/5 border-white/20 text-white placeholder:text-gray-400"
           />
-          {!hasCompletedKYC && userRole === 'tenant' && (
+          {!connected && (
+            <Badge variant="outline" className="text-blue-400 border-blue-400">
+              Connect wallet to book properties
+            </Badge>
+          )}
+          {connected && !hasCompletedKYC && userRole === 'tenant' && (
             <Badge variant="outline" className="text-yellow-400 border-yellow-400">
               Complete KYC to book properties
             </Badge>
@@ -214,7 +231,7 @@ const PropertyBrowser = () => {
             key={property.id}
             property={property}
             onView={handleViewProperty}
-            onBook={userRole === 'tenant' ? handleBookProperty : undefined}
+            onBook={connected && userRole === 'tenant' ? handleBookProperty : undefined}
           />
         ))}
       </div>
@@ -229,3 +246,5 @@ const PropertyBrowser = () => {
 };
 
 export default PropertyBrowser;
+
+}
