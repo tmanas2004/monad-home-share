@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { useWallet } from '@/contexts/WalletContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
