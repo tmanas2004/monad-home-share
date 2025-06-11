@@ -246,5 +246,3 @@ const PropertyBrowser = () => {
 };
 
 export default PropertyBrowser;
-
-}
